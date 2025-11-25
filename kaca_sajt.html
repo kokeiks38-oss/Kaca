@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Uprise – Hybrid EdTech & Talent Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      /* ORANGE–PURPLE THEME */
+      --bg: #130016;
+      --bg-soft: #1b0221;
+      --card: #21052f;
+      --primary: #f97316; /* orange */
+      --primary-soft: rgba(249, 115, 22, 0.16);
+      --accent: #9333ea;  /* purple */
+      --accent-soft: rgba(147, 51, 234, 0.18);
+      --danger: #dc2626;
+      --text: #f9fafb;
+      --text-soft: #e5e7eb;
+      --border-subtle: rgba(248, 250, 252, 0.15);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --transition-fast: 0.18s ease-out;
+      --shadow-card: 0 18px 45px rgba(10, 4, 24, 0.8);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background:
+        radial-gradient(circle at top left, rgba(249, 115, 22, 0.25), transparent 55%),
+        radial-gradient(circle at top right, rgba(147, 51, 234, 0.35), transparent 60%),
+        radial-gradient(circle at bottom, #02010c 0, #05000a 45%, #020005 100%);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(24px);
+      background: linear-gradient(
+        to bottom,
+        rgba(9, 3, 20, 0.96),
+        rgba(9, 3, 20, 0.8),
+        transparent
+      );
+      border-bottom: 1px solid rgba(249, 250, 251, 0.14);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.1rem;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .nav-links a {
+      padding: 0.3rem 0.4rem;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: #fefce8;
+      background: rgba(251, 146, 60, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .lang-toggle {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(11, 3, 25, 0.9);
+      color: var(--text-soft);
+      cursor: pointer;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.45rem 0.95rem;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      font-weight: 500;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: #0b0614;
+      box-shadow: 0 0 24px rgba(249, 115, 22, 0.7);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 34px rgba(249, 115, 22, 0.95);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: rgba(251, 146, 60, 0.65);
+      color: #fed7aa;
+    }
+
+    .btn-outline:hover {
+      background: rgba(24, 9, 33, 0.95);
+      border-color: #f97316;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-soft);
+    }
+
+    main section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid rgba(31, 17, 54, 0.85);
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.75rem;
+      color: #fed7aa;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      max-width: 560px;
+    }
+
+    /* HERO */
+
+    .hero {
+      padding-top: 3.5rem;
+      padding-bottom: 4.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
+      line-height: 1.1;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #fed7aa, #f97316, #a855f7, #f97316);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      margin-bottom: 1.3rem;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-micro {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+    }
+
+    .chip {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(252, 211, 77, 0.45);
+      color: #fee2e2;
+      background: rgba(24, 9, 33, 0.92);
+    }
+
+    .chip-pill {
+      background: var(--primary-soft);
+      border-color: rgba(249, 115, 22, 0.9);
+      color: #fffbeb;
+    }
+
+    /* HERO CARD */
+
+    .hero-card {
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 0 0, rgba(249, 115, 22, 0.45), transparent 52%),
+        radial-gradient(circle at 100% 100%, rgba(147, 51, 234, 0.55), transparent 55%),
+        #090014;
+      border: 1px solid rgba(254, 215, 170, 0.4);
+      padding: 1.3rem;
+      box-shadow: var(--shadow-card);
+      font-size: 0.85rem;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-card-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #fffbeb;
+      opacity: 0.85;
+    }
+
+    .status-pill {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(24, 9, 33, 0.92);
+      border: 1px solid rgba(249, 250, 251, 0.4);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-card {
+      background: rgba(15, 6, 34, 0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(254, 215, 170, 0.35);
+      padding: 0.55rem 0.6rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      margin-bottom: 0.15rem;
+    }
+
+    .stat-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .xp-bar {
+      height: 6px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(15, 6, 34, 0.9);
+      margin-top: 0.4rem;
+      border: 1px solid rgba(251, 191, 36, 0.6);
+    }
+
+    .xp-fill {
+      width: 68%;
+      height: 100%;
+      background: linear-gradient(90deg, #facc15, #f97316, #a855f7);
+    }
+
+    .hero-card-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .hero-avatar-stack {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 2px solid #090014;
+      background: linear-gradient(135deg, #f97316, #a855f7);
+      margin-left: -5px;
+    }
+
+    .hero-footer-text {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    /* GRIDS & CARDS */
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.1rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: rgba(15, 6, 34, 0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 1rem;
+      box-shadow: 0 15px 40px rgba(5, 1, 15, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.18), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 0.6rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .pill {
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: rgba(24, 9, 33, 0.96);
+      border: 1px solid rgba(254, 215, 170, 0.4);
+      color: var(--text-soft);
+    }
+
+    .pill-primary {
+      border-color: rgba(249, 115, 22, 0.9);
+      background: rgba(249, 115, 22, 0.25);
+      color: #fffbeb;
+    }
+
+    /* STEPS */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .step {
+      padding: 0.9rem;
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(254, 215, 170, 0.6);
+      background: rgba(15, 6, 34, 0.92);
+      font-size: 0.9rem;
+    }
+
+    .step-number {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-bottom: 0.2rem;
+    }
+
+    .step-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    @media (max-width: 900px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* DASHBOARD GRID, TABLE, BADGES */
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .table-mock {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .table-mock th,
+    .table-mock td {
+      padding: 0.4rem 0.5rem;
+      border-bottom: 1px solid rgba(39, 16, 66, 0.95);
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(24, 9, 33, 0.96);
+      border: 1px solid rgba(252, 211, 77, 0.5);
+    }
+
+    .badge-green {
+      border-color: rgba(34, 197, 94, 0.9);
+      background: rgba(22, 101, 52, 0.7);
+      color: #dcfce7;
+    }
+
+    .badge-orange {
+      border-color: rgba(249, 115, 22, 0.9);
+      background: rgba(180, 83, 9, 0.75);
+      color: #ffedd5;
+    }
+
+    /* FORMS, PRICING, BLOG, CONTACT */
+
+    .auth-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.4rem;
+    }
+
+    @media (max-width: 900px) {
+      .auth-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .input-group {
+      margin-bottom: 0.7rem;
+      font-size: 0.85rem;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--text-soft);
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 6, 34, 0.96);
+      color: var(--text);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus,
+    .input-group textarea:focus {
+      border-color: #f97316;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 1024px) {
+      .pricing-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .price-tag {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-note {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .blog-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .blog-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #fed7aa;
+      margin-bottom: 0.25rem;
+    }
+
+    .blog-title {
+      font-size: 0.98rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .blog-meta {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.4rem;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    footer {
+      padding: 2.2rem 0;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(31, 17, 54, 0.9);
+      background: radial-gradient(circle at top, rgba(147, 51, 234, 0.55), #05000a 55%);
+      margin-top: 2rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    section {
+      scroll-margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <!-- Put your orange-purple logo here -->
+        <img src="uprise-logo.png" alt="Uprise logo">
+        <span>UPRISE</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#home" data-i18n="nav-home">Home</a>
+        <a href="#about" data-i18n="nav-about">About</a>
+        <a href="#how-it-works" data-i18n="nav-how">How It Works</a>
+        <a href="#mentorship" data-i18n="nav-mentorship">Mentorship</a>
+        <a href="#tests" data-i18n="nav-tests">Tests</a>
+        <a href="#projects" data-i18n="nav-projects">Projects</a>
+        <a href="#talent" data-i18n="nav-talent">Talent</a>
+        <a href="#companies" data-i18n="nav-companies">For Companies</a>
+        <a href="#universities" data-i18n="nav-universities">Universities</a>
+        <a href="#pricing" data-i18n="nav-pricing">Pricing</a>
+        <a href="#blog" data-i18n="nav-blog">Blog</a>
+        <a href="#contact" data-i18n="nav-contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="lang-toggle" type="button">EN / SR</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('auth').scrollIntoView({behavior:'smooth'})" data-i18n="nav-login">Login</button>
+        <button class="btn btn-primary" onclick="document.getElementById('auth').scrollIntoView({behavior:'smooth'})" data-i18n="nav-signup">Sign Up</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="home">
+      <div class="container">
+        <div class="hero">
+          <div>
+            <p class="section-eyebrow" data-i18n="hero-eyebrow">Future-ready career platform</p>
+            <h1 class="hero-title">
+              <span class="hero-gradient" data-i18n="hero-title">Turn Potential into Real Experience.</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero-subtitle">
+              Uprise blends LinkedIn, Upwork and mentorship hubs into one hybrid ecosystem —
+              helping students and young professionals get real skills, projects and opportunities.
+            </p>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-i18n="cta-start">Start Your Journey</button>
+              <button class="btn btn-outline" data-i18n="cta-join-student">Join as Student</button>
+              <button class="btn btn-outline" data-i18n="cta-join-company">Join as Company</button>
+            </div>
+            <p class="hero-micro" data-i18n="hero-micro">
+              No experience? No job? Uprise breaks that loop with tests, projects and mentorship.
+            </p>
+
+            <div class="hero-badges">
+              <span class="chip chip-pill" data-i18n="hero-sectors">IT • AI • Marketing • Design • Finance</span>
+              <span class="chip" data-i18n="hero-badge-1">Profiles with XP & badges</span>
+              <span class="chip" data-i18n="hero-badge-2">Ranked & verified talent</span>
+            </div>
+          </div>
+
+          <!-- Dashboard-style hero card -->
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div>
+                <div class="hero-card-tag" data-i18n="hero-card-tag">Candidate Dashboard</div>
+                <div style="font-size:0.85rem; margin-top:0.1rem;">Mia • Front-end Student</div>
+              </div>
+              <span class="status-pill" data-i18n="hero-status">Level: Rising Star</span>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-card">
+                <div class="stat-label">XP</div>
+                <div class="stat-value">3,480</div>
+                <div class="xp-bar"><div class="xp-fill"></div></div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label" data-i18n="hero-tests-label">Tests passed</div>
+                <div class="stat-value">9/12</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label" data-i18n="hero-rating-label">Mentor rating</div>
+                <div class="stat-value">4.9 ★</div>
+              </div>
+            </div>
+
+            <div class="hero-card-footer">
+              <div>
+                <div style="font-size:0.8rem; margin-bottom:0.1rem;" data-i18n="hero-reco-title">Recommended Matches</div>
+                <div style="font-size:0.8rem; color:var(--text-soft);" data-i18n="hero-reco-text">
+                  3 internships • 2 remote projects • 1 mentorship slot
+                </div>
+              </div>
+              <div class="hero-avatar-stack">
+                <div class="avatar-dot" style="margin-left:0;"></div>
+                <div class="avatar-dot"></div>
+                <div class="avatar-dot"></div>
+              </div>
+            </div>
+            <p class="hero-footer-text" style="margin-top:0.45rem;" data-i18n="hero-footer">
+              Trusted by students, mentors, HR teams & universities across multiple sectors.
+            </p>
+          </div>
+        </div>
+
+        <!-- Who it's for -->
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="who-eyebrow">Who is Uprise for?</p>
+          <h2 class="section-title" data-i18n="who-title">Students, companies and universities in one ecosystem.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3 class="card-title" data-i18n="who-card1-title">Students & Young Professionals</h3>
+            <p class="card-text" data-i18n="who-card1-text">
+              Build a profile with verified skills, XP levels, projects and mentor reviews. Get
+              discovered for internships, part-time jobs and real client work.
+            </p>
+            <div class="pill-row">
+              <span class="pill pill-primary" data-i18n="who-card1-pill-main">Join as Student</span>
+              <span class="pill" data-i18n="who-card1-pill-sub">Portfolio • XP • Badges</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="who-card2-title">Companies & HR Teams</h3>
+            <p class="card-text" data-i18n="who-card2-text">
+              Access ranked, pre-tested candidates with transparent profiles and real project
+              history — not just CVs.
+            </p>
+            <div class="pill-row">
+              <span class="pill pill-primary" data-i18n="who-card2-pill-main">Join as Company</span>
+              <span class="pill" data-i18n="who-card2-pill-1">Skill filters</span>
+              <span class="pill" data-i18n="who-card2-pill-2">Custom tests</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="who-card3-title">Universities & Faculties</h3>
+            <p class="card-text" data-i18n="who-card3-text">
+              Track student skill development, connect with companies, and plug real projects into
+              your study programs.
+            </p>
+            <div class="pill-row">
+              <span class="pill pill-primary" data-i18n="who-card3-pill-main">Partner with Uprise</span>
+              <span class="pill" data-i18n="who-card3-pill-1">Cohort dashboards</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="about-eyebrow">About Uprise</p>
+          <h2 class="section-title" data-i18n="about-title">Fixing the “no experience, no job” loop.</h2>
+          <p class="section-subtitle" data-i18n="about-subtitle">
+            Uprise is a hybrid platform that combines education, career development and HR tools
+            into one place — so young people can prove their skills and companies can hire with
+            confidence.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3 class="card-title" data-i18n="about-card1-title">Hybrid by design</h3>
+            <p class="card-text" data-i18n="about-card1-text">
+              Part EdTech, part HR system, part talent marketplace. Learn, practice and get hired
+              without jumping between 5 different platforms.
+            </p>
+            <span class="pill" data-i18n="about-card1-pill">EdTech + HR + Marketplace</span>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="about-card2-title">Real projects, not just theory</h3>
+            <p class="card-text" data-i18n="about-card2-text">
+              Uprise uses project-based assignments and real-case tasks from companies and mentors
+              to build practical experience.
+            </p>
+            <span class="pill" data-i18n="about-card2-pill">Real-case tasks</span>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="about-card3-title">Transparent rankings</h3>
+            <p class="card-text" data-i18n="about-card3-text">
+              XP, levels, badges and ratings from mentors and companies give a clear signal of who
+              is actually ready.
+            </p>
+            <span class="pill" data-i18n="about-card3-pill">XP • Levels • Badges</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="how-eyebrow">How it works</p>
+          <h2 class="section-title" data-i18n="how-title">One platform. Three journeys.</h2>
+          <p class="section-subtitle" data-i18n="how-subtitle">
+            Uprise connects students, companies and universities via tests, projects, mentorship and
+            a shared talent marketplace.
+          </p>
+        </div>
+
+        <h3 style="font-size:1rem; margin-bottom:0.6rem;" data-i18n="how-students-title">For Students & Young Professionals</h3>
+        <div class="steps" style="margin-bottom:1.5rem;">
+          <div class="step">
+            <div class="step-number">01</div>
+            <div class="step-title" data-i18n="how-students-step1-title">Create your profile</div>
+            <p data-i18n="how-students-step1-text">
+              Add skills, interests, hobbies, sectors, certificates and ID verification. Connect
+              your LinkedIn and portfolio.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">02</div>
+            <div class="step-title" data-i18n="how-students-step2-title">Take tests & challenges</div>
+            <p data-i18n="how-students-step2-text">
+              Logic tests, skill assessments, personality tests and real-case mini projects earn you
+              XP and badges.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-title" data-i18n="how-students-step3-title">Join mentorship & projects</div>
+            <p data-i18n="how-students-step3-text">
+              Enter 3-month mentorships, monthly challenges and real projects to level up and
+              showcase your growth.
+            </p>
+          </div>
+        </div>
+
+        <h3 style="font-size:1rem; margin-bottom:0.6rem;" data-i18n="how-companies-title">For Companies & HR</h3>
+        <div class="steps" style="margin-bottom:1.5rem;">
+          <div class="step">
+            <div class="step-number">01</div>
+            <div class="step-title" data-i18n="how-companies-step1-title">Set your hiring needs</div>
+            <p data-i18n="how-companies-step1-text">
+              Define roles, sectors (IT, AI, marketing, HR, finance, engineering etc.), required
+              skills and seniority.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">02</div>
+            <div class="step-title" data-i18n="how-companies-step2-title">Browse ranked profiles</div>
+            <p data-i18n="how-companies-step2-text">
+              Filter by XP, test scores, projects, mentor feedback and availability. Shortlist the
+              best matches.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-title" data-i18n="how-companies-step3-title">Invite & rate talent</div>
+            <p data-i18n="how-companies-step3-text">
+              Run your own challenges, interview candidates, and rate their performance to improve
+              the ecosystem.
+            </p>
+          </div>
+        </div>
+
+        <h3 style="font-size:1rem; margin-bottom:0.6rem;" data-i18n="how-universities-title">For Universities & Faculties</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">01</div>
+            <div class="step-title" data-i18n="how-universities-step1-title">Connect cohorts</div>
+            <p data-i18n="how-universities-step1-text">
+              Link student accounts with your university and study programmes for easy tracking and
+              reporting.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">02</div>
+            <div class="step-title" data-i18n="how-universities-step2-title">Assign tests & projects</div>
+            <p data-i18n="how-universities-step2-text">
+              Use Uprise tests and challenges as coursework or optional extra-credit assignments.
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-title" data-i18n="how-universities-step3-title">Track outcomes</div>
+            <p data-i18n="how-universities-step3-text">
+              Monitor skill development, project completion and hiring outcomes per student or
+              cohort.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENTORSHIP PROGRAM -->
+    <section id="mentorship">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="mentorship-eyebrow">Mentorship program</p>
+          <h2 class="section-title" data-i18n="mentorship-title">3-month intensive mentorship, built for real careers.</h2>
+          <p class="section-subtitle" data-i18n="mentorship-subtitle">
+            Work with mentors from IT, AI, marketing, management, design, HR, finance, engineering
+            and more — through weekly sessions and project-based learning.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="card-title" data-i18n="mentorship-how-title">How mentorship works</h3>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="mentorship-how-1">Pick a sector: IT, AI, marketing, design, HR, finance, engineering, etc.</li>
+              <li data-i18n="mentorship-how-2">Match with a mentor based on goals and skill level.</li>
+              <li data-i18n="mentorship-how-3">Weekly sessions (online or in-person, depending on location).</li>
+              <li data-i18n="mentorship-how-4">Clear roadmap, exercises and project deliverables.</li>
+              <li data-i18n="mentorship-how-5">Feedback, rating, and portfolio-ready outcomes.</li>
+            </ul>
+            <button class="btn btn-primary" style="margin-top:1rem;" data-i18n="mentorship-cta">Get a Mentor</button>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="mentorship-snapshots-title">Mentor snapshots</h3>
+            <div style="font-size:0.85rem;">
+              <p data-i18n="mentorship-snap-1-head"><strong>Ana • UX Designer</strong> · 6 yrs · Mentored 32 students · 4.9 ★</p>
+              <div class="pill-row" style="margin-bottom:0.4rem;">
+                <span class="pill" data-i18n="mentorship-snap-1-tag1">Design Systems</span>
+                <span class="pill" data-i18n="mentorship-snap-1-tag2">Figma</span>
+                <span class="pill" data-i18n="mentorship-snap-1-tag3">Product Thinking</span>
+              </div>
+              <p data-i18n="mentorship-snap-2-head"><strong>Luka • Backend Dev</strong> · 5 yrs · Mentored 24 students · 4.8 ★</p>
+              <div class="pill-row" style="margin-bottom:0.4rem;">
+                <span class="pill" data-i18n="mentorship-snap-2-tag1">Node.js</span>
+                <span class="pill" data-i18n="mentorship-snap-2-tag2">Databases</span>
+                <span class="pill" data-i18n="mentorship-snap-2-tag3">Cloud Basics</span>
+              </div>
+              <p data-i18n="mentorship-snap-3-head"><strong>Milica • Marketing</strong> · 7 yrs · Mentored 15 students · 4.9 ★</p>
+              <div class="pill-row">
+                <span class="pill" data-i18n="mentorship-snap-3-tag1">Social Ads</span>
+                <span class="pill" data-i18n="mentorship-snap-3-tag2">Content Strategy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTS & CHALLENGES -->
+    <section id="tests">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="tests-eyebrow">Tests & challenges</p>
+          <h2 class="section-title" data-i18n="tests-title">Prove your skills with tests, XP and real-case tasks.</h2>
+          <p class="section-subtitle" data-i18n="tests-subtitle">
+            Uprise offers logic, skill and personality tests plus monthly challenges so students can
+            showcase what they can actually do.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3 class="card-title" data-i18n="tests-card1-title">Logic & problem-solving</h3>
+            <p class="card-text" data-i18n="tests-card1-text">
+              Timed logic tasks that show how you approach problems under pressure — used by
+              companies as pre-screening.
+            </p>
+            <span class="pill" data-i18n="tests-card1-pill">Timed challenges</span>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="tests-card2-title">Skill tests by sector</h3>
+            <p class="card-text" data-i18n="tests-card2-text">
+              Coding, design, marketing, management, finance, HR, engineering: pick tests tailored
+              to your path.
+            </p>
+            <span class="pill" data-i18n="tests-card2-pill">Sector-specific tests</span>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="tests-card3-title">Personality & team fit</h3>
+            <p class="card-text" data-i18n="tests-card3-text">
+              Personality snapshots that help mentors and companies understand your collaboration
+              style.
+            </p>
+            <span class="pill" data-i18n="tests-card3-pill">Team fit insights</span>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:1.5rem;">
+          <h3 class="card-title" data-i18n="tests-monthly-title">Monthly challenge example</h3>
+          <p class="card-text" data-i18n="tests-monthly-text">
+            <strong>“AI + Productivity Challenge”</strong> — automate one repetitive task using AI or
+            no-code tools, document your process and submit within 30 days.
+          </p>
+          <div class="pill-row">
+            <span class="pill pill-primary" data-i18n="tests-monthly-pill1">+400 XP</span>
+            <span class="pill" data-i18n="tests-monthly-pill2">Badge: Automation Rookie</span>
+            <span class="pill" data-i18n="tests-monthly-pill3">Open to: IT, AI, Business, Marketing</span>
+          </div>
+          <button class="btn btn-outline" style="margin-top:0.9rem;" data-i18n="tests-monthly-cta">Join This Month’s Challenge</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS MARKETPLACE -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="projects-eyebrow">Projects Marketplace</p>
+          <h2 class="section-title" data-i18n="projects-title">Do real work before your first “official” job.</h2>
+          <p class="section-subtitle" data-i18n="projects-subtitle">
+            Join guided projects, internships and client work to build practical experience,
+            portfolio pieces and a network.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="card-title" data-i18n="projects-feed-title">Project feed snapshot</h3>
+            <table class="table-mock">
+              <thead>
+                <tr>
+                  <th data-i18n="projects-table-project">Project</th>
+                  <th data-i18n="projects-table-sector">Sector</th>
+                  <th data-i18n="projects-table-difficulty">Difficulty</th>
+                  <th data-i18n="projects-table-reward">Reward</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-i18n="projects-row1-name">Landing page for FinTech</td>
+                  <td data-i18n="projects-row1-sector">IT / Design</td>
+                  <td><span class="badge" data-i18n="projects-row1-diff">Intermediate</span></td>
+                  <td><span class="badge-green" data-i18n="projects-row1-reward">+300 XP</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="projects-row2-name">Social media content plan</td>
+                  <td data-i18n="projects-row2-sector">Marketing</td>
+                  <td><span class="badge" data-i18n="projects-row2-diff">Beginner</span></td>
+                  <td><span class="badge-green" data-i18n="projects-row2-reward">+150 XP</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="projects-row3-name">Data dashboard prototype</td>
+                  <td data-i18n="projects-row3-sector">AI / Analytics</td>
+                  <td><span class="badge badge-orange" data-i18n="projects-row3-diff">Advanced</span></td>
+                  <td><span class="badge-green" data-i18n="projects-row3-reward">+600 XP</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-outline" style="margin-top:0.9rem;" data-i18n="projects-cta">Browse All Projects</button>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="projects-how-title">How projects work</h3>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="projects-how-1">Students apply or get matched to relevant projects.</li>
+              <li data-i18n="projects-how-2">Mentors or company reps guide expectations and deliverables.</li>
+              <li data-i18n="projects-how-3">Projects are scoped for 1–8 weeks.</li>
+              <li data-i18n="projects-how-4">Upon completion, students earn XP, ratings and portfolio items.</li>
+              <li data-i18n="projects-how-5">Companies can hire top performers directly from the platform.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TALENT PROFILES -->
+    <section id="talent">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="talent-eyebrow">Talent profiles</p>
+          <h2 class="section-title" data-i18n="talent-title">Profiles that feel like LinkedIn, but gamified.</h2>
+          <p class="section-subtitle" data-i18n="talent-subtitle">
+            See skills, XP levels, test scores, portfolios, mentor feedback and verified
+            information — all in one profile.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="card-title" data-i18n="talent-profile-title">Profile snapshot</h3>
+            <p style="font-size:0.9rem;" data-i18n="talent-profile-head"><strong>Marko • Junior Data Analyst</strong></p>
+            <div class="pill-row" style="margin-top:0.3rem;">
+              <span class="pill pill-primary" data-i18n="talent-profile-pill1">Level: Prodigy</span>
+              <span class="pill" data-i18n="talent-profile-pill2">XP: 5,200</span>
+              <span class="pill" data-i18n="talent-profile-pill3">Rating: 4.8 ★</span>
+            </div>
+            <p class="card-text" style="margin-top:0.5rem;" data-i18n="talent-profile-text">
+              Skills: Python, SQL, Power BI, basic statistics. Completed 5 Uprise projects and 2
+              mentorship programs.
+            </p>
+            <div class="pill-row">
+              <span class="pill" data-i18n="talent-profile-tag1">Portfolio</span>
+              <span class="pill" data-i18n="talent-profile-tag2">Tests & Scores</span>
+              <span class="pill" data-i18n="talent-profile-tag3">Mentor reviews</span>
+              <span class="pill" data-i18n="talent-profile-tag4">Verified university</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="talent-filters-title">Talent browsing filters</h3>
+            <p class="card-text" data-i18n="talent-filters-text">
+              Companies and universities can filter talent by sector, skills, XP, rating,
+              availability, languages and location.
+            </p>
+            <div class="pill-row">
+              <span class="pill" data-i18n="talent-filters-pill1">Sector: IT, AI, Marketing...</span>
+              <span class="pill" data-i18n="talent-filters-pill2">XP range filter</span>
+              <span class="pill" data-i18n="talent-filters-pill3">Language: EN / SR</span>
+              <span class="pill" data-i18n="talent-filters-pill4">Remote-friendly</span>
+            </div>
+            <button class="btn btn-outline" style="margin-top:0.9rem;" data-i18n="talent-cta">Explore Talent</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOR COMPANIES -->
+    <section id="companies">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="companies-eyebrow">For companies</p>
+          <h2 class="section-title" data-i18n="companies-title">Smart hiring for HR teams who don’t have time to gamble.</h2>
+          <p class="section-subtitle" data-i18n="companies-subtitle">
+            View ranked, pre-tested candidates with transparent performance data and skill-based
+            profiles.
+          </p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <h3 class="card-title" data-i18n="companies-dashboard-title">Company dashboard</h3>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="companies-dashboard-1">Create roles, internship programs and project briefs.</li>
+              <li data-i18n="companies-dashboard-2">Set filters: sector, skills, languages, experience, XP, rating.</li>
+              <li data-i18n="companies-dashboard-3">See shortlists of top-ranked candidates for each role.</li>
+              <li data-i18n="companies-dashboard-4">Launch custom tests and challenges for your pipeline.</li>
+              <li data-i18n="companies-dashboard-5">Track conversions: invited → interviewed → hired.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="companies-integrations-title">Integrations</h3>
+            <p class="card-text" data-i18n="companies-integrations-text">
+              Connect Uprise with LinkedIn, Upwork and other recruiting platforms for better
+              visibility and smoother workflows.
+            </p>
+            <div class="pill-row">
+              <span class="pill pill-primary" data-i18n="companies-integrations-pill1">LinkedIn import</span>
+              <span class="pill" data-i18n="companies-integrations-pill2">Job sync</span>
+              <span class="pill" data-i18n="companies-integrations-pill3">ATS-friendly export</span>
+            </div>
+            <button class="btn btn-primary" style="margin-top:1rem;" data-i18n="companies-cta">Book a Demo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOR UNIVERSITIES -->
+    <section id="universities">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="universities-eyebrow">For universities</p>
+          <h2 class="section-title" data-i18n="universities-title">Bridge the gap between classroom and real work.</h2>
+          <p class="section-subtitle" data-i18n="universities-subtitle">
+            Give students structured opportunities to test skills, join projects and connect with
+            mentors and companies — and track their progress.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="card-title" data-i18n="universities-faculty-title">Faculty profiles & partnerships</h3>
+            <p class="card-text" data-i18n="universities-faculty-text">
+              Create a profile for your faculty, connect specific departments, and showcase partner
+              companies and joint programs.
+            </p>
+            <div class="pill-row">
+              <span class="pill" data-i18n="universities-faculty-pill1">Department dashboards</span>
+              <span class="pill" data-i18n="universities-faculty-pill2">Program-based cohorts</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="universities-tracking-title">Student success tracking</h3>
+            <p class="card-text" data-i18n="universities-tracking-text">
+              Track tests completed, challenges joined, projects done and hired status per student
+              or cohort.
+            </p>
+            <div class="pill-row">
+              <span class="pill" data-i18n="universities-tracking-pill1">Analytics</span>
+              <span class="pill" data-i18n="universities-tracking-pill2">Career outcomes</span>
+            </div>
+            <button class="btn btn-outline" style="margin-top:0.9rem;" data-i18n="universities-cta">Partner with Uprise</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="pricing-eyebrow">Pricing & Premium</p>
+          <h2 class="section-title" data-i18n="pricing-title">Simple plans for students, companies and universities.</h2>
+          <p class="section-subtitle" data-i18n="pricing-subtitle">
+            Basic access stays accessible. Premium unlocks extra visibility, filters and insights.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="card">
+            <h3 class="card-title" data-i18n="pricing-students-title">Students & Young Professionals</h3>
+            <p class="price-tag" data-i18n="pricing-students-price">Free</p>
+            <p class="price-note" data-i18n="pricing-students-note">+ optional premium boosts</p>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="pricing-students-1">Profile & XP system</li>
+              <li data-i18n="pricing-students-2">Access to basic tests and challenges</li>
+              <li data-i18n="pricing-students-3">Project marketplace (limited slots)</li>
+              <li data-i18n="pricing-students-4">Mentor browsing</li>
+            </ul>
+            <hr style="border-color:rgba(31,41,55,0.9); margin:0.8rem 0;" />
+            <p class="price-note" data-i18n="pricing-students-prem-title">Premium (Boost)</p>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="pricing-students-prem-1">Profile boost & featured spots</li>
+              <li data-i18n="pricing-students-prem-2">Priority access to projects</li>
+              <li data-i18n="pricing-students-prem-3">Advanced analytics & insights</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color:rgba(249,115,22,0.9); box-shadow:0 20px 55px rgba(249,115,22,0.6);">
+            <h3 class="card-title" data-i18n="pricing-companies-title">Companies & HR</h3>
+            <p class="price-tag" data-i18n="pricing-companies-price">Tiered</p>
+            <p class="price-note" data-i18n="pricing-companies-note">Per team / per role</p>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="pricing-companies-1">Company dashboard</li>
+              <li data-i18n="pricing-companies-2">Access to ranked talent</li>
+              <li data-i18n="pricing-companies-3">Custom tests & challenges</li>
+              <li data-i18n="pricing-companies-4">Advanced filters & analytics</li>
+            </ul>
+            <button class="btn btn-primary" style="margin-top:1rem;" data-i18n="pricing-companies-cta">Talk to Sales</button>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" data-i18n="pricing-universities-title">Universities & Faculties</h3>
+            <p class="price-tag" data-i18n="pricing-universities-price">Custom</p>
+            <p class="price-note" data-i18n="pricing-universities-note">Based on faculty size</p>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="pricing-universities-1">Faculty & program profiles</li>
+              <li data-i18n="pricing-universities-2">Cohort analytics & reports</li>
+              <li data-i18n="pricing-universities-3">Curriculum-integrated challenges</li>
+              <li data-i18n="pricing-universities-4">Priority company partnerships</li>
+            </ul>
+            <button class="btn btn-outline" style="margin-top:1rem;" data-i18n="pricing-universities-cta">Request Academic Plan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD PREVIEW -->
+    <section id="dashboard">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="dashboard-eyebrow">Dashboard</p>
+          <h2 class="section-title" data-i18n="dashboard-title">One dashboard for students, mentors and companies.</h2>
+          <p class="section-subtitle" data-i18n="dashboard-subtitle">
+            Everyone sees what matters to them: goals, progress, opportunities or candidates.
+          </p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <h3 class="card-title" data-i18n="dashboard-student-title">Student dashboard</h3>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="dashboard-student-1">Your XP, level, badges and streaks.</li>
+              <li data-i18n="dashboard-student-2">Upcoming tests, deadlines and sessions.</li>
+              <li data-i18n="dashboard-student-3">Active projects & applications.</li>
+              <li data-i18n="dashboard-student-4">Mentor feedback and ratings.</li>
+              <li data-i18n="dashboard-student-5">Suggested roles, projects and mentors.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="dashboard-mentor-title">Mentor & company views</h3>
+            <ul style="font-size:0.9rem; color:var(--text-soft); padding-left:1rem;">
+              <li data-i18n="dashboard-mentor-1">Mentors see mentee progress and upcoming sessions.</li>
+              <li data-i18n="dashboard-mentor-2">Companies see candidate pipelines with rankings.</li>
+              <li data-i18n="dashboard-mentor-3">Universities see cohort-level analytics.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGIN / SIGN UP -->
+    <section id="auth">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="auth-eyebrow">Login / Sign up</p>
+          <h2 class="section-title" data-i18n="auth-title">Join Uprise and start your journey.</h2>
+          <p class="section-subtitle" data-i18n="auth-subtitle">
+            Create a profile as a student, company, mentor or university. Verification keeps the
+            ecosystem safe and trusted.
+          </p>
+        </div>
+
+        <div class="auth-grid">
+          <div class="card">
+            <h3 class="card-title" data-i18n="auth-signup-title">Sign up</h3>
+            <div class="input-group">
+              <label data-i18n="auth-type-label">Account type</label>
+              <select>
+                <option data-i18n="auth-type-student">Student / Young Professional</option>
+                <option data-i18n="auth-type-company">Company / HR</option>
+                <option data-i18n="auth-type-mentor">Mentor</option>
+                <option data-i18n="auth-type-university">University / Faculty</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label data-i18n="auth-email-label">Email</label>
+              <input type="email" placeholder="you@example.com" />
+            </div>
+            <div class="input-group">
+              <label data-i18n="auth-pass-label">Password</label>
+              <input type="password" placeholder="••••••••" />
+            </div>
+            <div class="input-group">
+              <label data-i18n="auth-lang-label">Language / Jezik</label>
+              <select>
+                <option>English</option>
+                <option>Srpski</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" style="margin-top:0.8rem; width:100%;" data-i18n="auth-signup-cta">Create Account</button>
+            <p style="font-size:0.8rem; color:var(--text-soft); margin-top:0.5rem;" data-i18n="auth-signup-note">
+              By signing up you agree to Uprise’s Terms & Privacy.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" data-i18n="auth-login-title">Login</h3>
+            <div class="input-group">
+              <label data-i18n="auth-email-label">Email</label>
+              <input type="email" placeholder="you@example.com" />
+            </div>
+            <div class="input-group">
+              <label data-i18n="auth-pass-label">Password</label>
+              <input type="password" placeholder="••••••••" />
+            </div>
+            <button class="btn btn-outline" style="margin-top:0.7rem; width:100%;" data-i18n="auth-login-cta">Login</button>
+            <p style="font-size:0.78rem; color:var(--text-soft); margin-top:0.4rem;" data-i18n="auth-login-note">
+              Forgot password? • Use SSO with LinkedIn (soon)
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG / RESOURCES -->
+    <section id="blog">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="blog-eyebrow">Blog & Resources</p>
+          <h2 class="section-title" data-i18n="blog-title">Guides, playbooks and stories from the Uprise community.</h2>
+          <p class="section-subtitle" data-i18n="blog-subtitle">
+            Help students and HR teams speak the same language — from portfolios to onboarding.
+          </p>
+        </div>
+
+        <div class="blog-grid">
+          <div class="card">
+            <p class="blog-tag" data-i18n="blog-card1-tag">Students • Careers</p>
+            <h3 class="blog-title" data-i18n="blog-card1-title">How to turn student projects into a real portfolio</h3>
+            <p class="card-text" data-i18n="blog-card1-text">
+              Learn how to present your Uprise projects so companies instantly understand your
+              skills.
+            </p>
+            <p class="blog-meta" data-i18n="blog-card1-meta">5 min read</p>
+          </div>
+          <div class="card">
+            <p class="blog-tag" data-i18n="blog-card2-tag">HR • Hiring</p>
+            <h3 class="blog-title" data-i18n="blog-card2-title">Skills-first hiring: why XP beats years of experience</h3>
+            <p class="card-text" data-i18n="blog-card2-text">
+              Why some of the best entry-level hires don’t have long CVs — but have serious
+              practical skills.
+            </p>
+            <p class="blog-meta" data-i18n="blog-card2-meta">7 min read</p>
+          </div>
+          <div class="card">
+            <p class="blog-tag" data-i18n="blog-card3-tag">Universities</p>
+            <h3 class="blog-title" data-i18n="blog-card3-title">Bridging academia and industry with real projects</h3>
+            <p class="card-text" data-i18n="blog-card3-text">
+              Case study of integrating Uprise challenges into semester coursework.
+            </p>
+            <p class="blog-meta" data-i18n="blog-card3-meta">6 min read</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow" data-i18n="contact-eyebrow">Contact</p>
+          <h2 class="section-title" data-i18n="contact-title">Let’s build the next generation of talent together.</h2>
+          <p class="section-subtitle" data-i18n="contact-subtitle">
+            Whether you’re a student, company or university, we’d love to hear from you.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card">
+            <h3 class="card-title" data-i18n="contact-form-title">Contact form</h3>
+            <div class="input-group">
+              <label data-i18n="contact-name-label">Name</label>
+              <input type="text" placeholder="Your name" />
+            </div>
+            <div class="input-group">
+              <label data-i18n="contact-email-label">Email</label>
+              <input type="email" placeholder="you@example.com" />
+            </div>
+            <div class="input-group">
+              <label data-i18n="contact-role-label">I'm reaching out as</label>
+              <select>
+                <option data-i18n="contact-role-student">Student / Young Professional</option>
+                <option data-i18n="contact-role-company">Company / HR</option>
+                <option data-i18n="contact-role-mentor">Mentor</option>
+                <option data-i18n="contact-role-university">University / Faculty</option>
+                <option data-i18n="contact-role-other">Other</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label data-i18n="contact-message-label">Message</label>
+              <textarea placeholder="Tell us what you need help with or what you’d like to create together."></textarea>
+            </div>
+            <button class="btn btn-primary" style="margin-top:0.7rem;" data-i18n="contact-send-cta">Send Message</button>
+          </div>
+          <div class="card">
+            <h3 class="card-title" data-i18n="contact-direct-title">Direct info</h3>
+            <p class="card-text" data-i18n="contact-direct-text1">
+              Prefer email? Reach us at:
+              <br /><strong>hello@uprise-platform.com</strong> (example)
+            </p>
+            <p class="card-text" data-i18n="contact-direct-text2">
+              <strong>Languages:</strong> English & Serbian (EN / SR)
+              <br /><strong>Time zones:</strong> CET & remote-friendly.
+            </p>
+            <p class="card-text" data-i18n="contact-direct-text3">
+              We aim to respond to students, mentors and partners within 1–2 business days.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>&copy; <span id="year"></span> Uprise. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#about" data-i18n="footer-about">About</a>
+        <a href="#pricing" data-i18n="footer-pricing">Pricing</a>
+        <a href="#blog" data-i18n="footer-blog">Blog</a>
+        <a href="#contact" data-i18n="footer-contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const translations = {
+      en: {
+        "nav-home": "Home",
+        "nav-about": "About",
+        "nav-how": "How It Works",
+        "nav-mentorship": "Mentorship",
+        "nav-tests": "Tests",
+        "nav-projects": "Projects",
+        "nav-talent": "Talent",
+        "nav-companies": "For Companies",
+        "nav-universities": "Universities",
+        "nav-pricing": "Pricing",
+        "nav-blog": "Blog",
+        "nav-contact": "Contact",
+        "nav-login": "Login",
+        "nav-signup": "Sign Up",
+
+        "hero-eyebrow": "Future-ready career platform",
+        "hero-title": "Turn Potential into Real Experience.",
+        "hero-subtitle": "Uprise blends LinkedIn, Upwork and mentorship hubs into one hybrid ecosystem — helping students and young professionals get real skills, projects and opportunities.",
+        "cta-start": "Start Your Journey",
+        "cta-join-student": "Join as Student",
+        "cta-join-company": "Join as Company",
+        "hero-micro": "No experience? No job? Uprise breaks that loop with tests, projects and mentorship.",
+        "hero-sectors": "IT • AI • Marketing • Design • Finance",
+        "hero-badge-1": "Profiles with XP & badges",
+        "hero-badge-2": "Ranked & verified talent",
+        "hero-card-tag": "Candidate Dashboard",
+        "hero-status": "Level: Rising Star",
+        "hero-tests-label": "Tests passed",
+        "hero-rating-label": "Mentor rating",
+        "hero-reco-title": "Recommended Matches",
+        "hero-reco-text": "3 internships • 2 remote projects • 1 mentorship slot",
+        "hero-footer": "Trusted by students, mentors, HR teams & universities across multiple sectors.",
+
+        "who-eyebrow": "Who is Uprise for?",
+        "who-title": "Students, companies and universities in one ecosystem.",
+        "who-card1-title": "Students & Young Professionals",
+        "who-card1-text": "Build a profile with verified skills, XP levels, projects and mentor reviews. Get discovered for internships, part-time jobs and real client work.",
+        "who-card1-pill-main": "Join as Student",
+        "who-card1-pill-sub": "Portfolio • XP • Badges",
+        "who-card2-title": "Companies & HR Teams",
+        "who-card2-text": "Access ranked, pre-tested candidates with transparent profiles and real project history — not just CVs.",
+        "who-card2-pill-main": "Join as Company",
+        "who-card2-pill-1": "Skill filters",
+        "who-card2-pill-2": "Custom tests",
+        "who-card3-title": "Universities & Faculties",
+        "who-card3-text": "Track student skill development, connect with companies, and plug real projects into your study programs.",
+        "who-card3-pill-main": "Partner with Uprise",
+        "who-card3-pill-1": "Cohort dashboards",
+
+        "about-eyebrow": "About Uprise",
+        "about-title": "Fixing the “no experience, no job” loop.",
+        "about-subtitle": "Uprise is a hybrid platform that combines education, career development and HR tools into one place — so young people can prove their skills and companies can hire with confidence.",
+        "about-card1-title": "Hybrid by design",
+        "about-card1-text": "Part EdTech, part HR system, part talent marketplace. Learn, practice and get hired without jumping between 5 different platforms.",
+        "about-card1-pill": "EdTech + HR + Marketplace",
+        "about-card2-title": "Real projects, not just theory",
+        "about-card2-text": "Uprise uses project-based assignments and real-case tasks from companies and mentors to build practical experience.",
+        "about-card2-pill": "Real-case tasks",
+        "about-card3-title": "Transparent rankings",
+        "about-card3-text": "XP, levels, badges and ratings from mentors and companies give a clear signal of who is actually ready.",
+        "about-card3-pill": "XP • Levels • Badges",
+
+        "how-eyebrow": "How it works",
+        "how-title": "One platform. Three journeys.",
+        "how-subtitle": "Uprise connects students, companies and universities via tests, projects, mentorship and a shared talent marketplace.",
+        "how-students-title": "For Students & Young Professionals",
+        "how-students-step1-title": "Create your profile",
+        "how-students-step1-text": "Add skills, interests, hobbies, sectors, certificates and ID verification. Connect your LinkedIn and portfolio.",
+        "how-students-step2-title": "Take tests & challenges",
+        "how-students-step2-text": "Logic tests, skill assessments, personality tests and real-case mini projects earn you XP and badges.",
+        "how-students-step3-title": "Join mentorship & projects",
+        "how-students-step3-text": "Enter 3-month mentorships, monthly challenges and real projects to level up and showcase your growth.",
+        "how-companies-title": "For Companies & HR",
+        "how-companies-step1-title": "Set your hiring needs",
+        "how-companies-step1-text": "Define roles, sectors (IT, AI, marketing, HR, finance, engineering etc.), required skills and seniority.",
+        "how-companies-step2-title": "Browse ranked profiles",
+        "how-companies-step2-text": "Filter by XP, test scores, projects, mentor feedback and availability. Shortlist the best matches.",
+        "how-companies-step3-title": "Invite & rate talent",
+        "how-companies-step3-text": "Run your own challenges, interview candidates, and rate their performance to improve the ecosystem.",
+        "how-universities-title": "For Universities & Faculties",
+        "how-universities-step1-title": "Connect cohorts",
+        "how-universities-step1-text": "Link student accounts with your university and study programmes for easy tracking and reporting.",
+        "how-universities-step2-title": "Assign tests & projects",
+        "how-universities-step2-text": "Use Uprise tests and challenges as coursework or optional extra-credit assignments.",
+        "how-universities-step3-title": "Track outcomes",
+        "how-universities-step3-text": "Monitor skill development, project completion and hiring outcomes per student or cohort.",
+
+        "mentorship-eyebrow": "Mentorship program",
+        "mentorship-title": "3-month intensive mentorship, built for real careers.",
+        "mentorship-subtitle": "Work with mentors from IT, AI, marketing, management, design, HR, finance, engineering and more — through weekly sessions and project-based learning.",
+        "mentorship-how-title": "How mentorship works",
+        "mentorship-how-1": "Pick a sector: IT, AI, marketing, design, HR, finance, engineering, etc.",
+        "mentorship-how-2": "Match with a mentor based on goals and skill level.",
+        "mentorship-how-3": "Weekly sessions (online or in-person, depending on location).",
+        "mentorship-how-4": "Clear roadmap, exercises and project deliverables.",
+        "mentorship-how-5": "Feedback, rating, and portfolio-ready outcomes.",
+        "mentorship-cta": "Get a Mentor",
+        "mentorship-snapshots-title": "Mentor snapshots",
+        "mentorship-snap-1-head": "Ana • UX Designer · 6 yrs · Mentored 32 students · 4.9 ★",
+        "mentorship-snap-1-tag1": "Design Systems",
+        "mentorship-snap-1-tag2": "Figma",
+        "mentorship-snap-1-tag3": "Product Thinking",
+        "mentorship-snap-2-head": "Luka • Backend Dev · 5 yrs · Mentored 24 students · 4.8 ★",
+        "mentorship-snap-2-tag1": "Node.js",
+        "mentorship-snap-2-tag2": "Databases",
+        "mentorship-snap-2-tag3": "Cloud Basics",
+        "mentorship-snap-3-head": "Milica • Marketing · 7 yrs · Mentored 15 students · 4.9 ★",
+        "mentorship-snap-3-tag1": "Social Ads",
+        "mentorship-snap-3-tag2": "Content Strategy",
+
+        "tests-eyebrow": "Tests & challenges",
+        "tests-title": "Prove your skills with tests, XP and real-case tasks.",
+        "tests-subtitle": "Uprise offers logic, skill and personality tests plus monthly challenges so students can showcase what they can actually do.",
+        "tests-card1-title": "Logic & problem-solving",
+        "tests-card1-text": "Timed logic tasks that show how you approach problems under pressure — used by companies as pre-screening.",
+        "tests-card1-pill": "Timed challenges",
+        "tests-card2-title": "Skill tests by sector",
+        "tests-card2-text": "Coding, design, marketing, management, finance, HR, engineering: pick tests tailored to your path.",
+        "tests-card2-pill": "Sector-specific tests",
+        "tests-card3-title": "Personality & team fit",
+        "tests-card3-text": "Personality snapshots that help mentors and companies understand your collaboration style.",
+        "tests-card3-pill": "Team fit insights",
+        "tests-monthly-title": "Monthly challenge example",
+        "tests-monthly-text": "\"AI + Productivity Challenge\" — automate one repetitive task using AI or no-code tools, document your process and submit within 30 days.",
+        "tests-monthly-pill1": "+400 XP",
+        "tests-monthly-pill2": "Badge: Automation Rookie",
+        "tests-monthly-pill3": "Open to: IT, AI, Business, Marketing",
+        "tests-monthly-cta": "Join This Month’s Challenge",
+
+        "projects-eyebrow": "Projects Marketplace",
+        "projects-title": "Do real work before your first “official” job.",
+        "projects-subtitle": "Join guided projects, internships and client work to build practical experience, portfolio pieces and a network.",
+        "projects-feed-title": "Project feed snapshot",
+        "projects-table-project": "Project",
+        "projects-table-sector": "Sector",
+        "projects-table-difficulty": "Difficulty",
+        "projects-table-reward": "Reward",
+        "projects-row1-name": "Landing page for FinTech",
+        "projects-row1-sector": "IT / Design",
+        "projects-row1-diff": "Intermediate",
+        "projects-row1-reward": "+300 XP",
+        "projects-row2-name": "Social media content plan",
+        "projects-row2-sector": "Marketing",
+        "projects-row2-diff": "Beginner",
+        "projects-row2-reward": "+150 XP",
+        "projects-row3-name": "Data dashboard prototype",
+        "projects-row3-sector": "AI / Analytics",
+        "projects-row3-diff": "Advanced",
+        "projects-row3-reward": "+600 XP",
+        "projects-cta": "Browse All Projects",
+        "projects-how-title": "How projects work",
+        "projects-how-1": "Students apply or get matched to relevant projects.",
+        "projects-how-2": "Mentors or company reps guide expectations and deliverables.",
+        "projects-how-3": "Projects are scoped for 1–8 weeks.",
+        "projects-how-4": "Upon completion, students earn XP, ratings and portfolio items.",
+        "projects-how-5": "Companies can hire top performers directly from the platform.",
+
+        "talent-eyebrow": "Talent profiles",
+        "talent-title": "Profiles that feel like LinkedIn, but gamified.",
+        "talent-subtitle": "See skills, XP levels, test scores, portfolios, mentor feedback and verified information — all in one profile.",
+        "talent-profile-title": "Profile snapshot",
+        "talent-profile-head": "Marko • Junior Data Analyst",
+        "talent-profile-pill1": "Level: Prodigy",
+        "talent-profile-pill2": "XP: 5,200",
+        "talent-profile-pill3": "Rating: 4.8 ★",
+        "talent-profile-text": "Skills: Python, SQL, Power BI, basic statistics. Completed 5 Uprise projects and 2 mentorship programs.",
+        "talent-profile-tag1": "Portfolio",
+        "talent-profile-tag2": "Tests & Scores",
+        "talent-profile-tag3": "Mentor reviews",
+        "talent-profile-tag4": "Verified university",
+        "talent-filters-title": "Talent browsing filters",
+        "talent-filters-text": "Companies and universities can filter talent by sector, skills, XP, rating, availability, languages and location.",
+        "talent-filters-pill1": "Sector: IT, AI, Marketing...",
+        "talent-filters-pill2": "XP range filter",
+        "talent-filters-pill3": "Language: EN / SR",
+        "talent-filters-pill4": "Remote-friendly",
+        "talent-cta": "Explore Talent",
+
+        "companies-eyebrow": "For companies",
+        "companies-title": "Smart hiring for HR teams who don’t have time to gamble.",
+        "companies-subtitle": "View ranked, pre-tested candidates with transparent performance data and skill-based profiles.",
+        "companies-dashboard-title": "Company dashboard",
+        "companies-dashboard-1": "Create roles, internship programs and project briefs.",
+        "companies-dashboard-2": "Set filters: sector, skills, languages, experience, XP, rating.",
+        "companies-dashboard-3": "See shortlists of top-ranked candidates for each role.",
+        "companies-dashboard-4": "Launch custom tests and challenges for your pipeline.",
+        "companies-dashboard-5": "Track conversions: invited → interviewed → hired.",
+        "companies-integrations-title": "Integrations",
+        "companies-integrations-text": "Connect Uprise with LinkedIn, Upwork and other recruiting platforms for better visibility and smoother workflows.",
+        "companies-integrations-pill1": "LinkedIn import",
+        "companies-integrations-pill2": "Job sync",
+        "companies-integrations-pill3": "ATS-friendly export",
+        "companies-cta": "Book a Demo",
+
+        "universities-eyebrow": "For universities",
+        "universities-title": "Bridge the gap between classroom and real work.",
+        "universities-subtitle": "Give students structured opportunities to test skills, join projects and connect with mentors and companies — and track their progress.",
+        "universities-faculty-title": "Faculty profiles & partnerships",
+        "universities-faculty-text": "Create a profile for your faculty, connect specific departments, and showcase partner companies and joint programs.",
+        "universities-faculty-pill1": "Department dashboards",
+        "universities-faculty-pill2": "Program-based cohorts",
+        "universities-tracking-title": "Student success tracking",
+        "universities-tracking-text": "Track tests completed, challenges joined, projects done and hired status per student or cohort.",
+        "universities-tracking-pill1": "Analytics",
+        "universities-tracking-pill2": "Career outcomes",
+        "universities-cta": "Partner with Uprise",
+
+        "pricing-eyebrow": "Pricing & Premium",
+        "pricing-title": "Simple plans for students, companies and universities.",
+        "pricing-subtitle": "Basic access stays accessible. Premium unlocks extra visibility, filters and insights.",
+        "pricing-students-title": "Students & Young Professionals",
+        "pricing-students-price": "Free",
+        "pricing-students-note": "+ optional premium boosts",
+        "pricing-students-1": "Profile & XP system",
+        "pricing-students-2": "Access to basic tests and challenges",
+        "pricing-students-3": "Project marketplace (limited slots)",
+        "pricing-students-4": "Mentor browsing",
+        "pricing-students-prem-title": "Premium (Boost)",
+        "pricing-students-prem-1": "Profile boost & featured spots",
+        "pricing-students-prem-2": "Priority access to projects",
+        "pricing-students-prem-3": "Advanced analytics & insights",
+        "pricing-companies-title": "Companies & HR",
+        "pricing-companies-price": "Tiered",
+        "pricing-companies-note": "Per team / per role",
+        "pricing-companies-1": "Company dashboard",
+        "pricing-companies-2": "Access to ranked talent",
+        "pricing-companies-3": "Custom tests & challenges",
+        "pricing-companies-4": "Advanced filters & analytics",
+        "pricing-companies-cta": "Talk to Sales",
+        "pricing-universities-title": "Universities & Faculties",
+        "pricing-universities-price": "Custom",
+        "pricing-universities-note": "Based on faculty size",
+        "pricing-universities-1": "Faculty & program profiles",
+        "pricing-universities-2": "Cohort analytics & reports",
+        "pricing-universities-3": "Curriculum-integrated challenges",
+        "pricing-universities-4": "Priority company partnerships",
+        "pricing-universities-cta": "Request Academic Plan",
+
+        "dashboard-eyebrow": "Dashboard",
+        "dashboard-title": "One dashboard for students, mentors and companies.",
+        "dashboard-subtitle": "Everyone sees what matters to them: goals, progress, opportunities or candidates.",
+        "dashboard-student-title": "Student dashboard",
+        "dashboard-student-1": "Your XP, level, badges and streaks.",
+        "dashboard-student-2": "Upcoming tests, deadlines and sessions.",
+        "dashboard-student-3": "Active projects & applications.",
+        "dashboard-student-4": "Mentor feedback and ratings.",
+        "dashboard-student-5": "Suggested roles, projects and mentors.",
+        "dashboard-mentor-title": "Mentor & company views",
+        "dashboard-mentor-1": "Mentors see mentee progress and upcoming sessions.",
+        "dashboard-mentor-2": "Companies see candidate pipelines with rankings.",
+        "dashboard-mentor-3": "Universities see cohort-level analytics.",
+
+        "auth-eyebrow": "Login / Sign up",
+        "auth-title": "Join Uprise and start your journey.",
+        "auth-subtitle": "Create a profile as a student, company, mentor or university. Verification keeps the ecosystem safe and trusted.",
+        "auth-signup-title": "Sign up",
+        "auth-type-label": "Account type",
+        "auth-type-student": "Student / Young Professional",
+        "auth-type-company": "Company / HR",
+        "auth-type-mentor": "Mentor",
+        "auth-type-university": "University / Faculty",
+        "auth-email-label": "Email",
+        "auth-pass-label": "Password",
+        "auth-lang-label": "Language / Jezik",
+        "auth-signup-cta": "Create Account",
+        "auth-signup-note": "By signing up you agree to Uprise’s Terms & Privacy.",
+        "auth-login-title": "Login",
+        "auth-login-cta": "Login",
+        "auth-login-note": "Forgot password? • Use SSO with LinkedIn (soon)",
+
+        "blog-eyebrow": "Blog & Resources",
+        "blog-title": "Guides, playbooks and stories from the Uprise community.",
+        "blog-subtitle": "Help students and HR teams speak the same language — from portfolios to onboarding.",
+        "blog-card1-tag": "Students • Careers",
+        "blog-card1-title": "How to turn student projects into a real portfolio",
+        "blog-card1-text": "Learn how to present your Uprise projects so companies instantly understand your skills.",
+        "blog-card1-meta": "5 min read",
+        "blog-card2-tag": "HR • Hiring",
+        "blog-card2-title": "Skills-first hiring: why XP beats years of experience",
+        "blog-card2-text": "Why some of the best entry-level hires don’t have long CVs — but have serious practical skills.",
+        "blog-card2-meta": "7 min read",
+        "blog-card3-tag": "Universities",
+        "blog-card3-title": "Bridging academia and industry with real projects",
+        "blog-card3-text": "Case study of integrating Uprise challenges into semester coursework.",
+        "blog-card3-meta": "6 min read",
+
+        "contact-eyebrow": "Contact",
+        "contact-title": "Let’s build the next generation of talent together.",
+        "contact-subtitle": "Whether you’re a student, company or university, we’d love to hear from you.",
+        "contact-form-title": "Contact form",
+        "contact-name-label": "Name",
+        "contact-email-label": "Email",
+        "contact-role-label": "I'm reaching out as",
+        "contact-role-student": "Student / Young Professional",
+        "contact-role-company": "Company / HR",
+        "contact-role-mentor": "Mentor",
+        "contact-role-university": "University / Faculty",
+        "contact-role-other": "Other",
+        "contact-message-label": "Message",
+        "contact-send-cta": "Send Message",
+        "contact-direct-title": "Direct info",
+        "contact-direct-text1": "Prefer email? Reach us at:\nhello@uprise-platform.com (example)",
+        "contact-direct-text2": "Languages: English & Serbian (EN / SR)\nTime zones: CET & remote-friendly.",
+        "contact-direct-text3": "We aim to respond to students, mentors and partners within 1–2 business days.",
+
+        "footer-about": "About",
+        "footer-pricing": "Pricing",
+        "footer-blog": "Blog",
+        "footer-contact": "Contact"
+      },
+
+      sr: {
+        "nav-home": "Početna",
+        "nav-about": "O nama",
+        "nav-how": "Kako funkcioniše",
+        "nav-mentorship": "Mentorstvo",
+        "nav-tests": "Testovi",
+        "nav-projects": "Projekti",
+        "nav-talent": "Talenti",
+        "nav-companies": "Za kompanije",
+        "nav-universities": "Za fakultete",
+        "nav-pricing": "Cene",
+        "nav-blog": "Blog",
+        "nav-contact": "Kontakt",
+        "nav-login": "Prijava",
+        "nav-signup": "Registracija",
+
+        "hero-eyebrow": "Platforma za karijeru nove generacije",
+        "hero-title": "Pretvori potencijal u pravo iskustvo.",
+        "hero-subtitle": "Uprise spaja LinkedIn, Upwork i mentorske programe u jedan hibridni ekosistem — pomaže studentima i mladim profesionalcima da steknu prave veštine, projekte i prilike.",
+        "cta-start": "Započni svoje putovanje",
+        "cta-join-student": "Pridruži se kao student",
+        "cta-join-company": "Pridruži se kao kompanija",
+        "hero-micro": "Bez iskustva nema posla? Uprise prekida taj krug kroz testove, projekte i mentorstvo.",
+        "hero-sectors": "IT • AI • Marketing • Dizajn • Finansije",
+        "hero-badge-1": "Profil sa XP poenima i bedževima",
+        "hero-badge-2": "Rangirani i verifikovani kandidati",
+        "hero-card-tag": "Kontrolna tabla kandidata",
+        "hero-status": "Nivo: Rising Star",
+        "hero-tests-label": "Položenih testova",
+        "hero-rating-label": "Ocena mentora",
+        "hero-reco-title": "Preporučene prilike",
+        "hero-reco-text": "3 prakse • 2 udaljena projekta • 1 mentorsko mesto",
+        "hero-footer": "Platformu koriste studenti, mentori, HR timovi i fakulteti iz različitih sektora.",
+
+        "who-eyebrow": "Za koga je Uprise?",
+        "who-title": "Studenti, kompanije i fakulteti u jednom ekosistemu.",
+        "who-card1-title": "Studenti i mladi profesionalci",
+        "who-card1-text": "Izgradi profil sa verifikovanim veštinama, XP nivoima, projektima i ocenama mentora. Budi primećen za prakse, poslove i klijente.",
+        "who-card1-pill-main": "Pridruži se kao student",
+        "who-card1-pill-sub": "Portfolio • XP • Bedževi",
+        "who-card2-title": "Kompanije i HR timovi",
+        "who-card2-text": "Pristupi rangiranim, prethodno testiranim kandidatima sa transparentnim profilima i realnim projektima — ne samo CV-jem.",
+        "who-card2-pill-main": "Pridruži se kao kompanija",
+        "who-card2-pill-1": "Filteri veština",
+        "who-card2-pill-2": "Prilagođeni testovi",
+        "who-card3-title": "Univerziteti i fakulteti",
+        "who-card3-text": "Prati razvoj veština, poveži se sa kompanijama i uključi realne projekte u nastavu.",
+        "who-card3-pill-main": "Postani Uprise partner",
+        "who-card3-pill-1": "Pregled generacija",
+
+        "about-eyebrow": "O Uprise-u",
+        "about-title": "Rešavamo problem „nemaš iskustvo – nemaš posao“.",
+        "about-subtitle": "Uprise je hibridna platforma koja spaja obrazovanje, razvoj karijere i HR alate na jednom mestu — da bi mladi mogli da dokažu veštine, a kompanije da zapošljavaju sa više sigurnosti.",
+        "about-card1-title": "Hibridna priroda",
+        "about-card1-text": "Delom EdTech, delom HR sistem, delom tržište talenata. Uči, vežbaj i zapošljavaj se bez skakanja sa platforme na platformu.",
+        "about-card1-pill": "EdTech + HR + Marketplace",
+        "about-card2-title": "Stvarni projekti, ne samo teorija",
+        "about-card2-text": "Uprise koristi projektne zadatke i realne case-ove kompanija i mentora kako bi se gradilo praktično iskustvo.",
+        "about-card2-pill": "Realni zadaci",
+        "about-card3-title": "Transparentni rangovi",
+        "about-card3-text": "XP, nivoi, bedževi i ocene mentora i kompanija daju jasan signal ko je zaista spreman.",
+        "about-card3-pill": "XP • Nivoi • Bedževi",
+
+        "how-eyebrow": "Kako funkcioniše",
+        "how-title": "Jedna platforma. Tri putanje.",
+        "how-subtitle": "Uprise povezuje studente, kompanije i fakultete kroz testove, projekte, mentorstvo i zajedničko tržište talenata.",
+        "how-students-title": "Za studente i mlade profesionalce",
+        "how-students-step1-title": "Kreiraj svoj profil",
+        "how-students-step1-text": "Dodaj veštine, interesovanja, hobije, sektore, sertifikate i verifikuj identitet. Poveži LinkedIn i portfolio.",
+        "how-students-step2-title": "Radi testove i izazove",
+        "how-students-step2-text": "Logički testovi, provere veština, lični testovi i mini case projekti donose ti XP i bedževe.",
+        "how-students-step3-title": "Uđi u mentorstvo i projekte",
+        "how-students-step3-text": "Prijavi se na tromesečne mentorski programe, mesečne izazove i realne projekte da pokažeš napredak.",
+        "how-companies-title": "Za kompanije i HR",
+        "how-companies-step1-title": "Definiši potrebe",
+        "how-companies-step1-text": "Definiši pozicije, sektore (IT, AI, marketing, HR, finansije, inženjering...), tražene veštine i nivo senioriteta.",
+        "how-companies-step2-title": "Pregledaj rangirane profile",
+        "how-companies-step2-text": "Filtriraj po XP-u, testovima, projektima, povratnim informacijama mentora i dostupnosti. Kreiraj shortlistu.",
+        "how-companies-step3-title": "Pozovi i oceni talente",
+        "how-companies-step3-text": "Kreiraj sopstvene izazove, organizuj intervjue i ocenjuj kandidate da bi sistem postajao još precizniji.",
+        "how-universities-title": "Za univerzitete i fakultete",
+        "how-universities-step1-title": "Poveži generacije",
+        "how-universities-step1-text": "Poveži studentske naloge sa fakultetom i studijskim programima radi praćenja i izveštavanja.",
+        "how-universities-step2-title": "Dodeli testove i projekte",
+        "how-universities-step2-text": "Koristi Uprise testove i izazove kao deo nastave ili dodatne aktivnosti.",
+        "how-universities-step3-title": "Prati rezultate",
+        "how-universities-step3-text": "Prati razvoj veština, završene projekte i zapošljivost po studentu ili generaciji.",
+
+        "mentorship-eyebrow": "Mentorski program",
+        "mentorship-title": "Tromesečno intenzivno mentorstvo za prave karijere.",
+        "mentorship-subtitle": "Radi sa mentorima iz IT-a, AI-ja, marketinga, menadžmenta, dizajna, HR-a, finansija, inženjeringa i drugih oblasti — kroz nedeljne sesije i projektni rad.",
+        "mentorship-how-title": "Kako funkcioniše mentorstvo",
+        "mentorship-how-1": "Izaberi sektor: IT, AI, marketing, dizajn, HR, finansije, inženjering itd.",
+        "mentorship-how-2": "Upari se sa mentorom na osnovu ciljeva i trenutnog nivoa.",
+        "mentorship-how-3": "Nedeljne sesije (online ili uživo, u zavisnosti od lokacije).",
+        "mentorship-how-4": "Jasan roadmap, zadaci i projektni deliverables.",
+        "mentorship-how-5": "Feedback, ocene i materijal spreman za portfolio.",
+        "mentorship-cta": "Pronađi mentora",
+        "mentorship-snapshots-title": "Mentori u zajednici",
+        "mentorship-snap-1-head": "Ana • UX dizajner · 6 god · 32 mentija · 4.9 ★",
+        "mentorship-snap-1-tag1": "Design Systems",
+        "mentorship-snap-1-tag2": "Figma",
+        "mentorship-snap-1-tag3": "Product Thinking",
+        "mentorship-snap-2-head": "Luka • Backend dev · 5 god · 24 mentija · 4.8 ★",
+        "mentorship-snap-2-tag1": "Node.js",
+        "mentorship-snap-2-tag2": "Baze podataka",
+        "mentorship-snap-2-tag3": "Osnove clouda",
+        "mentorship-snap-3-head": "Milica • Marketing · 7 god · 15 mentija · 4.9 ★",
+        "mentorship-snap-3-tag1": "Social Ads",
+        "mentorship-snap-3-tag2": "Content strategija",
+
+        "tests-eyebrow": "Testovi i izazovi",
+        "tests-title": "Pokaži svoje veštine kroz testove, XP i realne zadatke.",
+        "tests-subtitle": "Uprise nudi logičke, stručne i lične testove, kao i mesečne izazove, kako bi studenti dokazali šta zaista znaju.",
+        "tests-card1-title": "Logika i rešavanje problema",
+        "tests-card1-text": "Vremenski ograničeni logički zadaci pokazuju kako razmišljaš pod pritiskom — kompanije ih koriste kao predfiltriranje.",
+        "tests-card1-pill": "Vremenski izazovi",
+        "tests-card2-title": "Testovi veština po sektoru",
+        "tests-card2-text": "Programiranje, dizajn, marketing, menadžment, finansije, HR, inženjering — biraj testove za svoj put.",
+        "tests-card2-pill": "Sektorski testovi",
+        "tests-card3-title": "Ličnost i timski fit",
+        "tests-card3-text": "Kratki testovi ličnosti pomažu mentorima i kompanijama da razumeju tvoj stil saradnje.",
+        "tests-card3-pill": "Timski fit",
+        "tests-monthly-title": "Primer mesečnog izazova",
+        "tests-monthly-text": "\"AI + Productivity Challenge\" — automatizuj jedan repetitivni zadatak uz pomoć AI ili no-code alata, dokumentuj proces i pošalji rešenje u roku od 30 dana.",
+        "tests-monthly-pill1": "+400 XP",
+        "tests-monthly-pill2": "Bedž: Automation Rookie",
+        "tests-monthly-pill3": "Otvoreno za: IT, AI, biznis, marketing",
+        "tests-monthly-cta": "Prijavi se na mesečni izazov",
+
+        "projects-eyebrow": "Marketplace projekata",
+        "projects-title": "Radi prave stvari pre prvog „zvaničnog“ posla.",
+        "projects-subtitle": "Uključi se u vođene projekte, prakse i rad sa klijentima, i izgradi iskustvo, portfolio i mrežu kontakata.",
+        "projects-feed-title": "Primer feed-a projekata",
+        "projects-table-project": "Projekat",
+        "projects-table-sector": "Sektor",
+        "projects-table-difficulty": "Težina",
+        "projects-table-reward": "Nagrada",
+        "projects-row1-name": "Landing stranica za FinTech",
+        "projects-row1-sector": "IT / Dizajn",
+        "projects-row1-diff": "Srednji nivo",
+        "projects-row1-reward": "+300 XP",
+        "projects-row2-name": "Plan sadržaja za društvene mreže",
+        "projects-row2-sector": "Marketing",
+        "projects-row2-diff": "Početni nivo",
+        "projects-row2-reward": "+150 XP",
+        "projects-row3-name": "Prototip data dashboard-a",
+        "projects-row3-sector": "AI / Analitika",
+        "projects-row3-diff": "Napredni nivo",
+        "projects-row3-reward": "+600 XP",
+        "projects-cta": "Pregledaj sve projekte",
+        "projects-how-title": "Kako funkcionišu projekti",
+        "projects-how-1": "Studenti se prijavljuju ili bivaju upareni sa relevantnim projektima.",
+        "projects-how-2": "Mentori ili predstavnici kompanija definišu očekivanja i isporuke.",
+        "projects-how-3": "Projekti traju od 1 do 8 nedelja.",
+        "projects-how-4": "Po završetku dobijaš XP, ocene i stavke za portfolio.",
+        "projects-how-5": "Kompanije mogu direktno zaposliti najbolje učesnike.",
+
+        "talent-eyebrow": "Profili talenata",
+        "talent-title": "Profili koji liče na LinkedIn, ali su gamifikovani.",
+        "talent-subtitle": "Na profilu vidiš veštine, XP nivoe, rezultate testova, portfolio, feedback mentora i verifikovane informacije — sve na jednom mestu.",
+        "talent-profile-title": "Primer profila",
+        "talent-profile-head": "Marko • Junior Data Analyst",
+        "talent-profile-pill1": "Nivo: Prodigy",
+        "talent-profile-pill2": "XP: 5.200",
+        "talent-profile-pill3": "Ocena: 4.8 ★",
+        "talent-profile-text": "Veštine: Python, SQL, Power BI, osnove statistike. Završio 5 Uprise projekata i 2 mentorska programa.",
+        "talent-profile-tag1": "Portfolio",
+        "talent-profile-tag2": "Testovi i rezultati",
+        "talent-profile-tag3": "Ocene mentora",
+        "talent-profile-tag4": "Verifikovan fakultet",
+        "talent-filters-title": "Filteri za pretragu talenata",
+        "talent-filters-text": "Kompanije i fakulteti mogu filtrirati talente po sektoru, veštinama, XP-u, oceni, dostupnosti, jeziku i lokaciji.",
+        "talent-filters-pill1": "Sektor: IT, AI, Marketing...",
+        "talent-filters-pill2": "Filter po XP opsegu",
+        "talent-filters-pill3": "Jezik: EN / SR",
+        "talent-filters-pill4": "Remote-friendly",
+        "talent-cta": "Istraži talente",
+
+        "companies-eyebrow": "Za kompanije",
+        "companies-title": "Pametno zapošljavanje za HR timove koji nemaju vremena za kockanje.",
+        "companies-subtitle": "Pregledaj rangirane, prethodno testirane kandidate sa jasnim podacima o performansama i veštinama.",
+        "companies-dashboard-title": "Kontrolna tabla kompanije",
+        "companies-dashboard-1": "Kreiraj pozicije, programe praksi i projektne zadatke.",
+        "companies-dashboard-2": "Podesi filtere: sektor, veštine, jezici, iskustvo, XP, ocene.",
+        "companies-dashboard-3": "Vidi shortlistu najbolje rangiranih kandidata za svaku poziciju.",
+        "companies-dashboard-4": "Pokreni prilagođene testove i izazove za svoj hiring funnel.",
+        "companies-dashboard-5": "Prati tok: pozvan → intervju → zaposlen.",
+        "companies-integrations-title": "Integracije",
+        "companies-integrations-text": "Poveži Uprise sa LinkedIn-om, Upwork-om i drugim sistemima za zapošljavanje radi bolje vidljivosti i lakšeg rada.",
+        "companies-integrations-pill1": "LinkedIn import",
+        "companies-integrations-pill2": "Sync oglasa",
+        "companies-integrations-pill3": "ATS eksport",
+        "companies-cta": "Zakaži demo",
+
+        "universities-eyebrow": "Za univerzitete",
+        "universities-title": "Spoj učionicu i realni svet.",
+        "universities-subtitle": "Omogući studentima strukturisane prilike za testiranje veština, projekte i kontakt sa kompanijama i mentorima — i prati napredak.",
+        "universities-faculty-title": "Profili fakulteta i partnerstva",
+        "universities-faculty-text": "Kreiraj profil fakulteta, poveži katedre i prikaži partnerske kompanije i zajedničke programe.",
+        "universities-faculty-pill1": "Dashboard po katedri",
+        "universities-faculty-pill2": "Grupe po programu",
+        "universities-tracking-title": "Praćenje uspeha studenata",
+        "universities-tracking-text": "Prati završene testove, izazove, projekte i status zapošljavanja po studentu ili generaciji.",
+        "universities-tracking-pill1": "Analitika",
+        "universities-tracking-pill2": "Ishodi karijere",
+        "universities-cta": "Postani akademski partner",
+
+        "pricing-eyebrow": "Cene i Premium",
+        "pricing-title": "Jednostavni paketi za studente, kompanije i fakultete.",
+        "pricing-subtitle": "Osnovni pristup ostaje pristupačan. Premium otključava dodatnu vidljivost, filtere i uvide.",
+        "pricing-students-title": "Studenti i mladi profesionalci",
+        "pricing-students-price": "Besplatno",
+        "pricing-students-note": "+ opcioni premium boost-ovi",
+        "pricing-students-1": "Profil i XP sistem",
+        "pricing-students-2": "Pristup osnovnim testovima i izazovima",
+        "pricing-students-3": "Marketplace projekata (ograničen broj mesta)",
+        "pricing-students-4": "Pretraga mentora",
+        "pricing-students-prem-title": "Premium (Boost)",
+        "pricing-students-prem-1": "Boost profila i istaknute pozicije",
+        "pricing-students-prem-2": "Prioritetni pristup projektima",
+        "pricing-students-prem-3": "Detaljniji analitički uvidi",
+        "pricing-companies-title": "Kompanije i HR",
+        "pricing-companies-price": "Paket",
+        "pricing-companies-note": "Po timu / po poziciji",
+        "pricing-companies-1": "Kontrolna tabla kompanije",
+        "pricing-companies-2": "Pristup rangiranim kandidatima",
+        "pricing-companies-3": "Prilagođeni testovi i izazovi",
+        "pricing-companies-4": "Napredni filteri i analitika",
+        "pricing-companies-cta": "Razgovor sa prodajom",
+        "pricing-universities-title": "Univerziteti i fakulteti",
+        "pricing-universities-price": "Custom",
+        "pricing-universities-note": "U zavisnosti od veličine fakulteta",
+        "pricing-universities-1": "Profili fakulteta i programa",
+        "pricing-universities-2": "Analitika generacija i izveštaji",
+        "pricing-universities-3": "Izazovi integrisani u nastavu",
+        "pricing-universities-4": "Prioritetna partnerstva sa kompanijama",
+        "pricing-universities-cta": "Zatraži akademski paket",
+
+        "dashboard-eyebrow": "Kontrolne table",
+        "dashboard-title": "Jedna kontrolna tabla za studente, mentore i kompanije.",
+        "dashboard-subtitle": "Svako vidi ono što mu je važno: ciljeve, napredak, prilike ili kandidate.",
+        "dashboard-student-title": "Student dashboard",
+        "dashboard-student-1": "Tvoj XP, nivo, bedževi i streak-ovi.",
+        "dashboard-student-2": "Naredni testovi, rokovi i sesije.",
+        "dashboard-student-3": "Aktivni projekti i prijave.",
+        "dashboard-student-4": "Feedback i ocene mentora.",
+        "dashboard-student-5": "Predložene pozicije, projekti i mentori.",
+        "dashboard-mentor-title": "Pogled mentora i kompanija",
+        "dashboard-mentor-1": "Mentori prate napredak mentija i dolazeće sesije.",
+        "dashboard-mentor-2": "Kompanije vide pipeline kandidata i rang liste.",
+        "dashboard-mentor-3": "Fakulteti prate generacije kroz statistiku.",
+
+        "auth-eyebrow": "Prijava / Registracija",
+        "auth-title": "Pridruži se Uprise-u i započni svoje putovanje.",
+        "auth-subtitle": "Kreiraj nalog kao student, kompanija, mentor ili fakultet. Verifikacija čuva ekosistem sigurnim i pouzdanim.",
+        "auth-signup-title": "Registracija",
+        "auth-type-label": "Tip naloga",
+        "auth-type-student": "Student / mladi profesionalac",
+        "auth-type-company": "Kompanija / HR",
+        "auth-type-mentor": "Mentor",
+        "auth-type-university": "Univerzitet / fakultet",
+        "auth-email-label": "E-mail",
+        "auth-pass-label": "Lozinka",
+        "auth-lang-label": "Jezik",
+        "auth-signup-cta": "Kreiraj nalog",
+        "auth-signup-note": "Registracijom prihvataš Uprise uslove korišćenja i privatnosti.",
+        "auth-login-title": "Prijava",
+        "auth-login-cta": "Prijavi se",
+        "auth-login-note": "Zaboravljena lozinka? • Uskoro SSO preko LinkedIn-a",
+
+        "blog-eyebrow": "Blog i resursi",
+        "blog-title": "Vodiči, playbook-ovi i priče iz Uprise zajednice.",
+        "blog-subtitle": "Pomažemo studentima i HR timovima da pričaju istim jezikom — od portfolija do onboardinga.",
+        "blog-card1-tag": "Studenti • Karijera",
+        "blog-card1-title": "Kako da studentske projekte pretvoriš u pravi portfolio",
+        "blog-card1-text": "Nauči kako da prikažeš Uprise projekte tako da kompanije odmah razumeju tvoje veštine.",
+        "blog-card1-meta": "5 min čitanja",
+        "blog-card2-tag": "HR • Zapošljavanje",
+        "blog-card2-title": "Zapošljavanje po veštinama: zašto je XP jači od godina iskustva",
+        "blog-card2-text": "Zašto neki od najboljih juniora nemaju dugačak CV — ali imaju ozbiljne praktične veštine.",
+        "blog-card2-meta": "7 min čitanja",
+        "blog-card3-tag": "Univerziteti",
+        "blog-card3-title": "Kako povezati akademiju i industriju kroz realne projekte",
+        "blog-card3-text": "Case study integracije Uprise izazova u semestralni kurs.",
+        "blog-card3-meta": "6 min čitanja",
+
+        "contact-eyebrow": "Kontakt",
+        "contact-title": "Hajde da zajedno gradimo novu generaciju talenata.",
+        "contact-subtitle": "Bez obzira da li si student, kompanija ili fakultet — javi nam se.",
+        "contact-form-title": "Kontakt forma",
+        "contact-name-label": "Ime",
+        "contact-email-label": "E-mail",
+        "contact-role-label": "Javljam se kao",
+        "contact-role-student": "Student / mladi profesionalac",
+        "contact-role-company": "Kompanija / HR",
+        "contact-role-mentor": "Mentor",
+        "contact-role-university": "Univerzitet / fakultet",
+        "contact-role-other": "Ostalo",
+        "contact-message-label": "Poruka",
+        "contact-send-cta": "Pošalji poruku",
+        "contact-direct-title": "Direktan kontakt",
+        "contact-direct-text1": "Više voliš mail? Piši nam na:\nhello@uprise-platform.com (primer)",
+        "contact-direct-text2": "Jezici: engleski i srpski (EN / SR)\nVremenska zona: CET, radimo i remote.",
+        "contact-direct-text3": "Trudimo se da odgovorimo studentima, mentorima i partnerima u roku od 1–2 radna dana.",
+
+        "footer-about": "O nama",
+        "footer-pricing": "Cene",
+        "footer-blog": "Blog",
+        "footer-contact": "Kontakt"
+      }
+    };
+
+    let currentLang = "en";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.setAttribute("lang", lang === "en" ? "en" : "sr");
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        const translation = translations[lang][key];
+        if (!translation) return;
+
+        // For normal text nodes
+        if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+          // if we ever want placeholder translations, we could handle here
+        } else {
+          el.textContent = translation;
+        }
+      });
+
+      const toggleBtn = document.getElementById("lang-toggle");
+      if (toggleBtn) {
+        toggleBtn.textContent = lang === "en" ? "EN / SR" : "SR / EN";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setLanguage("en");
+      const toggleBtn = document.getElementById("lang-toggle");
+      if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+          setLanguage(currentLang === "en" ? "sr" : "en");
+        });
+      }
+    });
+  </script>
+</body>
+</html>
